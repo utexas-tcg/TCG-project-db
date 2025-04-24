@@ -50,16 +50,18 @@ This project provides a centralized dashboard and backend database to track all 
 
 ## 🗂 Project Structure
 
-/tcg-outreach/
-├── app.py                  # Main Streamlit app
-├── /pages/                 # Streamlit multipage app (if needed)
-├── /data/                  # Temporary local data (added to .gitignore)
-├── /db/                    # DB connection and models
-│   ├── models.py
-│   └── connect.py
-├── .env                    # Secure keys (DB credentials, etc.)
-├── .gitignore              # Ignore .env, /data, etc.
-└── requirements.txt
+    ```bash
+
+    /tcg-outreach/
+    ├── app.py                  # Main Streamlit app
+    ├── /pages/                 # Streamlit multipage app (if needed)
+    ├── /data/                  # Temporary local data (added to .gitignore)
+    ├── /db/                    # DB connection and models
+    │   ├── models.py
+    │   └── connect.py
+    ├── .env                    # Secure keys (DB credentials, etc.)
+    ├── .gitignore              # Ignore .env, /data, etc.
+    └── requirements.txt
 
 ---
 
