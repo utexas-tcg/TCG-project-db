@@ -50,3 +50,17 @@ This project provides a centralized dashboard and backend database to track all 
 
 ## 🗂 Project Structure
 
+tcg-outreach/ ├── app.py # Main Streamlit app ├── /pages/ # Additional app pages (if needed) ├── /db/ # Database connection and models │ ├── connect.py │ └── models.py ├── /data/ # Temporarily uploaded CSVs (ignored in git) ├── .env # Environment variables (DB credentials, etc.) ├── .gitignore # Exclude sensitive and unnecessary files ├── requirements.txt # Python dependencies └── README.md
+
+---
+
+## ⚙️ Tech Stack
+
+- Python 3.10+
+- Streamlit
+- SQLAlchemy
+- Pandas
+- PostgreSQL or SQLite
+- `dotenv` for environment management
+
+---
