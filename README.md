@@ -90,3 +90,14 @@ This project provides a centralized dashboard and backend database to track all 
     ```bash
     pip install -r requirements.txt
 
+4. Create .venv
+    ```bash
+    DB_URL=your_database_url_here
+    STREAMLIT_PASSWORD=your_secure_password
+
+5. Run it
+    ```bash
+    streamlit run app.py
+
+
+
