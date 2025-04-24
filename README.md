@@ -49,9 +49,6 @@ This project provides a centralized dashboard and backend database to track all 
 ---
 
 ## 🗂 Project Structure
-
-    ```bash
-
     /tcg-outreach/
     ├── app.py                  # Main Streamlit app
     ├── /pages/                 # Streamlit multipage app (if needed)
