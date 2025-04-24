@@ -50,7 +50,16 @@ This project provides a centralized dashboard and backend database to track all 
 
 ## 🗂 Project Structure
 
-tcg-outreach/ ├── app.py # Main Streamlit app ├── /pages/ # Additional app pages (if needed) ├── /db/ # Database connection and models │ ├── connect.py │ └── models.py ├── /data/ # Temporarily uploaded CSVs (ignored in git) ├── .env # Environment variables (DB credentials, etc.) ├── .gitignore # Exclude sensitive and unnecessary files ├── requirements.txt # Python dependencies └── README.md
+/tcg-outreach/
+├── app.py                  # Main Streamlit app
+├── /pages/                 # Streamlit multipage app (if needed)
+├── /data/                  # Temporary local data (added to .gitignore)
+├── /db/                    # DB connection and models
+│   ├── models.py
+│   └── connect.py
+├── .env                    # Secure keys (DB credentials, etc.)
+├── .gitignore              # Ignore .env, /data, etc.
+└── requirements.txt
 
 ---
 
@@ -64,3 +73,20 @@ tcg-outreach/ ├── app.py # Main Streamlit app ├── /pages/ # Addition
 - `dotenv` for environment management
 
 ---
+
+## 🚀 Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/tcg-outreach.git
+   cd tcg-outreach
+
+2. Create venv
+    ```bash
+    python -m venv venv
+    source venv/bin/activate    
+
+3. Dependencies
+    ```bash
+    pip install -r requirements.txt
+
