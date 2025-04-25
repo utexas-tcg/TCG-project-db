@@ -1,60 +1,54 @@
 import streamlit as st
-import pandas as pd
-from sqlalchemy.orm import Session
-from db.connect import SessionLocal
-from db.models import Outreach
-from datetime import datetime
-from csv_validator import validate
+from streamlit_option_menu import option_menu
+import importlib
 
-# Upload handler
-def handle_csv_upload(file, db: Session):
-    df = pd.read_csv(file)
+# Set config and hide sidebar
+st.set_page_config(page_title="TCG Dashboard", layout="wide", initial_sidebar_state="collapsed")
+st.markdown("""
+    <style>
+        [data-testid="stSidebar"] { display: none; }
+        [data-testid="collapsedControl"] { display: none; }
+    </style>
+    """, unsafe_allow_html=True)
 
-    required_cols = {"company_name", "contact_name", "contacted_by", "contact_date", "notes"}
-    if not required_cols.issubset(df.columns):
-        st.error(f"CSV must contain these columns: {required_cols}")
-        return
+selected = option_menu(
+    menu_title=None,
+    options=["Home", "Search", "Upload"],
+    icons=["house", "search", "cloud-upload"],
+    menu_icon="cast",
+    default_index=0,
+    orientation="horizontal",
+    styles={
+        "container": {
+            "padding": "0!important",
+            "background-color": "#0E1117",
+            "display": "flex",
+            "justify-content": "center"
+        },
+        "icon": {
+            "color": "white",
+            "font-size": "18px"
+        },
+        "nav-link": {
+            "font-size": "18px",
+            "text-align": "center",
+            "margin": "0 12px",
+            "color": "white",
+            "--hover-color": "rgba(10, 10, 69, 0.3)",  # transparent hover
+            "border": "1px solid black",
+            "border-radius": "10px"
+        },
+        "nav-link-selected": {
+            "background-color": "#0A0A45",
+            "color": "white",
+            "border": "2px solid black",
+            "border-radius": "10px"
+        }
+    }
+)
 
-    added = 0
-    for _, row in df.iterrows():
-        try:
-            entry = Outreach(
-                company_name=row['company_name'],
-                contact_name=row['contact_name'],
-                contacted_by=row['contacted_by'],
-                contact_date=datetime.strptime(row['contact_date'], "%Y-%m-%d").date(),
-                notes=row['notes']
-            )
-            db.add(entry)
-            added += 1
-        except Exception as e:
-            st.warning(f"Skipping row due to error: {e}")
-    db.commit()
-    st.success(f"{added} rows added to the database.")
-
-#main app
-def main():
-    st.title("TCG Outreach Tracker")
-    st.write("Upload a CSV of company outreach data to store it in the central database.")
-
-    db = SessionLocal()
-
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-    if uploaded_file:
-        #call validate here so that all of our csv files are consistent
-        handle_csv_upload(uploaded_file, db)
-
-    st.markdown("---")
-    if st.checkbox("View all outreach records"):
-        records = db.query(Outreach).all()
-        data = [{
-            "Company": r.company_name,
-            "Contact Name": r.contact_name,
-            "Contacted By": r.contacted_by,
-            "Date": r.contact_date,
-            "Notes": r.notes
-        } for r in records]
-        st.dataframe(pd.DataFrame(data))
-
-if __name__ == "__main__":
-    main()
+# Load corresponding module
+module_name = f"pages.{selected}"
+module = importlib.import_module(module_name)
+if hasattr(module, "main"):
+    module.main()
