@@ -7,13 +7,18 @@ Base = declarative_base()
 
 # Define table schema
 class Outreach(Base):
-    __tablename__ = "outreach"
+    __tablename__ = "outreach2"
 
     id = Column(Integer, primary_key=True, index=True)
-    company_name = Column(String, index=True)
-    contact_name = Column(String)
-    contacted_by = Column(String, index=True)
-    contact_date = Column(Date)
+    client_name = Column(String)
+    season = Column(String)
+    company = Column(String, index=True)
+    email_linkedin_insta = Column(String)
+    industry = Column(String)
+    website = Column(String)
+    reached_out = Column(String)
+    response = Column(String)
+    project_confirmed = Column(String)
     notes = Column(String)
 
 # Create the table(s)
