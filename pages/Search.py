@@ -36,7 +36,7 @@ def main():
             cols = st.columns(3)
             for j, entry in enumerate(filtered[i:i+3]):
                 with cols[j]:
-                    with st.expander(f"📬 {entry.company}"):
+                    with st.expander(f"{entry.company}"):
                         st.markdown(f"**Client Name:** {entry.client_name}")
                         st.markdown(f"**Season:** {entry.season}")
                         st.markdown(f"**Email/LinkedIn/Insta:** {entry.email_linkedin_insta}")
