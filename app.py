@@ -36,7 +36,7 @@ selected = option_menu(
             "color": "white",
             "--hover-color": "rgba(10, 10, 69, 0.3)",  # transparent hover
             "border": "1px solid black",
-            "border-radius": "10px"
+            "border-radius": "10px" 
         },
         "nav-link-selected": {
             "background-color": "#0A0A45",
