@@ -30,7 +30,7 @@ selected = option_menu(
             "font-size": "18px"
         },
         "nav-link": {
-            "font-size": "18px",
+            "font-size": "18px", 
             "text-align": "center",
             "margin": "0 12px",
             "color": "white",
