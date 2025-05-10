@@ -13,8 +13,8 @@ st.markdown("""
 
 selected = option_menu(
     menu_title=None,
-    options=["Home", "Search", "Upload"],
-    icons=["house", "search", "cloud-upload"],
+    options=["Home", "Search", "Edit", "Upload"],
+    icons=["house", "search", "pencil-square", "cloud-upload"],
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",

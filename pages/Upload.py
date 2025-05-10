@@ -7,6 +7,13 @@ from datetime import datetime
 from utils.utils import render_footer
 from csv_validator import validate  # Import validate from csv_validator.py
 
+def prepare_display(df):
+    df = df.fillna("N/A")
+    bool_cols = ["Reached Out?(Yes/No)", "Response(Yes/No/Talking)", "Project Confirmed(Yes/No)"]
+    for col in bool_cols:
+        df[col] = df[col].astype(str).str.capitalize()
+    return df
+
 def main():
     st.title("📤 Upload Outreach File\n---")
 
@@ -19,19 +26,26 @@ def main():
     if uploaded_file:
         reached_out_df, not_reached_out_df = validate(uploaded_file)
 
+        # Clean display format for Streamlit
+        reached_out_df_display = prepare_display(reached_out_df)
+        not_reached_out_df_display = prepare_display(not_reached_out_df)
+
         st.success("Standardized companies (Reached Out = True):")
-        st.dataframe(reached_out_df)
+        st.dataframe(reached_out_df_display)
 
         if not not_reached_out_df.empty:
             st.warning("These companies have NOT been reached out to and will not be added:")
-            st.dataframe(not_reached_out_df)
+            st.dataframe(not_reached_out_df_display)
 
         if st.button("Submit to Database"):
             for _, row in reached_out_df.iterrows():
                 try:
-                    if pd.isna(row['Client Name']) or pd.isna(row['Company']):
+                    row = row.where(pd.notnull(row), None)  # <-- Converts NaN to None
+
+                    # Skip only if BOTH Company AND Client Name are missing
+                    if row['Client Name'] is None and row['Company'] is None:
                         skipped += 1
-                        continue  # Skip rows with missing Client Name or Company
+                        continue
 
                     existing_entry = db.query(Outreach).filter(
                         Outreach.company == row['Company'],
@@ -47,12 +61,12 @@ def main():
                         client_name=row['Client Name'],
                         season=row['Season'],
                         company=row['Company'],
-                        email_linkedin_insta=row['Email/Linkedin/Insta'],
+                        contact_info=row['Contact Info'],
                         industry=row['Industry'],
                         website=row['Website'],
-                        reached_out=row['Reached Out?(Yes/No)'] == "true",
+                        reached_out=str(row['Reached Out?(Yes/No)']).strip().lower() == "true",
                         response=row['Response(Yes/No/Talking)'],
-                        project_confirmed=row['Project Confirmed(Yes/No)'] == "true",
+                        project_confirmed=str(row['Project Confirmed(Yes/No)']).strip().lower() == "true",
                         notes=row['Notes']
                     )
                     db.add(entry)
@@ -63,6 +77,7 @@ def main():
             db.commit()
             st.success(f"{added} new rows added.")
             if skipped:
-                st.info(f"{skipped} duplicate rows were skipped (already exist).")
+                st.info(f"{skipped} rows were skipped (duplicates or missing data).")
+
 
     render_footer()

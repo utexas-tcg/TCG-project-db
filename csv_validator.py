@@ -15,7 +15,7 @@ REQUIRED_COLUMNS = [
     "Client Name",
     "Season",
     "Company",
-    "Email/Linkedin/Insta",
+    "Contact Info",
     "Industry",
     "Website",
     "Reached Out?(Yes/No)",
@@ -67,7 +67,7 @@ def gemini_audit_and_fix(data):
     prompt = f"""
     You are a professional CSV data auditor and cleaner.
 
-    You will be given full CSV data below.
+    You will be given full CSV data below. Some values may be missing and some rows may be completely blank or not relevant.
     You must clean and reformat the CSV according to these exact rules:
 
     CSV Data:
@@ -85,8 +85,10 @@ def gemini_audit_and_fix(data):
         - If missing, fill with "N/A".
 
     2. Client Name:
-        - If missing or blank, fill with "N/A".
-        - Otherwise, preserve the original.
+        - This should be the *name of the individual person at the company* you reached out to.
+        - If the cell contains a company name, move that to the "Company" column instead.
+        - Acceptable formats: "John Doe", "Emily", "Michael Smith"
+        - If a name cannot be extracted, set to "N/A".
 
     3. Season:
         - If exists, preserve.
@@ -95,12 +97,13 @@ def gemini_audit_and_fix(data):
     4. Company:
         - Preserve.
 
-    5. Email/Linkedin/Insta:
+    5. Contact Info:
         - Preserve.
 
     6. Industry:
         - Preserve if available.
-        - If missing, fill with "Unknown Industry".
+        - If missing, determine what the industry is based on the company name and known industries.
+        - Otherwise, fill with "Unknown Industry".
 
     7. Website:
         - Preserve.
@@ -111,11 +114,10 @@ def gemini_audit_and_fix(data):
             - "no", "n", "NO", "false", "False" → "False"
         - If missing, default to "True".
 
-    9. Response(Yes, No, Talking):
+    9. Response(Yes, No):
         - Normalize:
             - "yes", "y", "YES", "true", "True" → "True"
             - "no", "n", "NO", "false", "False" → "False"
-            - "talking", "Talking" → keep as "Talking"
         - If missing, default to "False".
 
     10. Project Confirmed(Yes, No):
