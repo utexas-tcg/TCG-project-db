@@ -30,7 +30,6 @@ def main():
         reached_out_df_display = prepare_display(reached_out_df)
         not_reached_out_df_display = prepare_display(not_reached_out_df)
 
-        st.success("Standardized companies (Reached Out = True):")
         st.dataframe(reached_out_df_display)
 
         if not not_reached_out_df.empty:
@@ -42,14 +41,15 @@ def main():
                 try:
                     row = row.where(pd.notnull(row), None)  # <-- Converts NaN to None
 
-                    # Skip only if BOTH Company AND Client Name are missing
-                    if row['Client Name'] is None and row['Company'] is None:
+                    # Skip only if BOTH Company AND Contact Info are missing
+                    if row['Company'] is None or row['Contact Info'] is None:
                         skipped += 1
                         continue
 
+                    # Checks previous entries in the database
                     existing_entry = db.query(Outreach).filter(
                         Outreach.company == row['Company'],
-                        Outreach.client_name == row['Client Name']
+                        Outreach.contact_info == row['Contact Info']
                     ).first()
 
                     if existing_entry:

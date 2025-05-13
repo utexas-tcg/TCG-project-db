@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from db.connect import SessionLocal
 from db.models import Outreach
 from utils.utils import render_footer
+#from streamlit.runtime.scriptrunner import rerun
 
 def main():
     st.title("✏️ Edit Outreach Records\n---")
@@ -70,7 +71,16 @@ def main():
                             except Exception as e:
                                 st.error(f"Error updating record: {e}")
                                 db.rollback()
-    else:
-        st.info("Enter a company or client name to search for records to edit.")
+                
+                    # Add delete button outside the form but inside the expander# Add delete button outside the form but inside the expander
+                    if st.button(f"🗑️ Delete this record", key=f"delete_btn_{i}"):
+                        try:
+                            db.delete(entry)
+                            db.commit()
+                            st.success("Record deleted successfully!")
+                            #rerun()
+                        except Exception as e:
+                            st.error(f"Error deleting record: {e}")
+                            db.rollback()
     
     render_footer() 

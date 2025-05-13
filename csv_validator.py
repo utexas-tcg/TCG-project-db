@@ -102,7 +102,7 @@ def gemini_audit_and_fix(data):
 
     6. Industry:
         - Preserve if available.
-        - If missing, determine what the industry is based on the company name and known industries.
+        - If missing, determine what the industry is based on the company name, previous knowledge, and known industries.
         - Otherwise, fill with "Unknown Industry".
 
     7. Website:
@@ -126,6 +126,10 @@ def gemini_audit_and_fix(data):
 
     11. Notes:
         - Preserve.
+
+    DISREGARD ANY OTHER ROW THAT IS NOT IN THE HEADER ROW SPECIFIED ABOVE. 
+        - some input files have extra rows that are not part of the header row.
+        - these rows should be disregarded.
 
     General Rules:
         - Maintain original row order.
