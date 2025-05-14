@@ -11,9 +11,6 @@ def main():
     # Add a divider
     st.markdown("---")
     
-    # Search functionality from Search.py
-    st.subheader("Search Outreach Records")
-    
     db: Session = SessionLocal()
 
     results = db.query(Outreach).all()
@@ -43,8 +40,10 @@ def main():
                         st.markdown(f"**Project Confirmed:** {entry.project_confirmed}")
                         st.markdown(f"**Notes:** {entry.notes or 'N/A'}")
         st.markdown("---")
-        st.subheader("🔍 Search Results")
 
+  # Search functionality from Search.py
+    st.subheader("🔍 Search Outreach Records")
+    
     query = st.text_input("Search by Company or Client Name...").strip().lower()
 
     # Filter results based on query
