@@ -1,11 +1,5 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date
-from db.connect import engine
-from sqlalchemy import Boolean
-
-
-# Base class for models
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, Date, Boolean
+from db.connect import Base, engine
 
 # Define table schema
 class Outreach(Base):

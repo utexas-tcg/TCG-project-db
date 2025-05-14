@@ -33,11 +33,6 @@ def validate(file):
 
     corrected_csv_text = gemini_audit_and_fix(data)
 
-    with open("corrected_output.csv", "w", encoding="utf-8") as f:
-        f.write(corrected_csv_text.strip())
-
-    print('done with corrected csv file')
-
     # SAFER parsing
     cleaned_df = pd.read_csv(io.StringIO(corrected_csv_text.strip()), on_bad_lines="skip", engine="python")
 
@@ -51,9 +46,7 @@ def validate(file):
     cleaned_df["Reached Out?(Yes/No)"] = cleaned_df["Reached Out?(Yes/No)"].astype(str).str.strip().str.lower()
 
     reached_out_df = cleaned_df[cleaned_df["Reached Out?(Yes/No)"].str.lower() == "true"]
-    print(reached_out_df)
     not_reached_out_df = cleaned_df[cleaned_df["Reached Out?(Yes/No)"].str.lower() != "true"]
-    print(not_reached_out_df)
 
     return reached_out_df, not_reached_out_df
 
@@ -61,7 +54,6 @@ def validate(file):
 def gemini_audit_and_fix(data):
     """Use Gemini to reformat and clean the full CSV file into the required standardized format."""
 
-    # Instead of .head(10), show the entire CSV content
     full_preview = data.to_csv(index=False)
 
     prompt = f"""
@@ -75,11 +67,9 @@ def gemini_audit_and_fix(data):
 
     Formatting Rules:
         - Only output valid CSV, starting immediately with the header row. No markdown, no explanations, no extra text.
-
-    Header Columns (in exact order): {REQUIRED_COLUMNS_STRING}
+        - Header Columns (in exact order): {REQUIRED_COLUMNS_STRING}
 
     Rules for each column:
-
     1. Committee Member:
         - If exists, preserve the value.
         - If missing, fill with "N/A".

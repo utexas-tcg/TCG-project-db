@@ -6,7 +6,7 @@ from utils.utils import render_footer
 #from streamlit.runtime.scriptrunner import rerun
 
 def main():
-    st.title("✏️ Edit Outreach Records\n---")
+    st.title("Edit Outreach Records\n---")
 
     db: Session = SessionLocal()
     
@@ -27,7 +27,7 @@ def main():
             
             # Display each record with edit capability
             for i, entry in enumerate(results):
-                with st.expander(f"{entry.company} - {entry.client_name}"):
+                with st.expander(f"{entry.company} - {entry.committee_member}"):
                     with st.form(key=f"edit_form_{i}"):
                         st.subheader("Edit Record")
                         

@@ -1,21 +1,41 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-# Load .env file
+# Load environment variables from .env
 load_dotenv()
 
-# Get the database URL from environment
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-print("DB URL:", DATABASE_URL)
+engine = create_engine(DATABASE_URL)
 
-# Create the engine
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
-)
-
-# Create a session
+# Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Create Base class
+Base = declarative_base()
+
+# For testing connection
+def test_connection():
+    try:
+        # Create a connection
+        conn = engine.connect()
+        print("Connection successful!")
+        
+        # Execute a test query
+        result = conn.execute("SELECT NOW();").fetchone()
+        print("Current Time:", result)
+        
+        # Close the connection
+        conn.close()
+        print("Connection closed.")
+        return True
+        
+    except Exception as e:
+        print(f"Failed to connect: {e}")
+        return False
+
+# Test connection when this module is imported
+test_connection()

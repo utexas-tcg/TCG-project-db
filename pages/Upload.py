@@ -15,7 +15,7 @@ def prepare_display(df):
     return df
 
 def main():
-    st.title("📤 Upload Outreach File\n---")
+    st.title("Upload Outreach File\n---")
 
     db = SessionLocal()
     added = 0

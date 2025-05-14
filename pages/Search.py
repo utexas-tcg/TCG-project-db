@@ -5,11 +5,11 @@ from db.models import Outreach
 from utils.utils import render_footer
 
 def main():
-    st.title("🔍 Search Outreach Records\n---")
+    st.title("Search Outreach Records\n---")
    #st.markdown("# )
 
     db: Session = SessionLocal()
-    query = st.text_input("Search by Company or Contact Info...").strip().lower()
+    query = st.text_input("Search by Company or Client Name...").strip().lower()
 
     results = db.query(Outreach).all()
 
@@ -17,6 +17,28 @@ def main():
         st.warning("No records found in the database.")
         render_footer()
         return
+
+    # Display confirmed projects section
+    confirmed_projects = [entry for entry in results if entry.project_confirmed]
+    if confirmed_projects:
+        st.subheader("✅ Past Projects")
+        for i in range(0, len(confirmed_projects), 3):
+            cols = st.columns(3)
+            for j, entry in enumerate(confirmed_projects[i:i+3]):
+                with cols[j]:
+                    with st.expander(f"{entry.company or 'No Company Name'}"):
+                        st.markdown(f"**Committee Member:** {entry.committee_member or 'N/A'}")
+                        st.markdown(f"**Client Name:** {entry.client_name or 'N/A'}")
+                        st.markdown(f"**Season:** {entry.season or 'N/A'}")
+                        st.markdown(f"**Contact Info:** {entry.contact_info or 'N/A'}")
+                        st.markdown(f"**Industry:** {entry.industry or 'N/A'}")
+                        st.markdown(f"**Website:** {entry.website or 'N/A'}")
+                        st.markdown(f"**Reached Out:** {entry.reached_out}")
+                        st.markdown(f"**Response:** {entry.response}")
+                        st.markdown(f"**Project Confirmed:** {entry.project_confirmed}")
+                        st.markdown(f"**Notes:** {entry.notes or 'N/A'}")
+        st.markdown("---")
+        st.subheader("🔍 Search Results")
 
     # Filter results based on query
     filtered = []
@@ -42,7 +64,7 @@ def main():
             for j, entry in enumerate(filtered[i:i+3]):
                 with cols[j]:
                     with st.expander(f"{entry.company or 'No Company Name'}"):
-                        st.markdown(f"**Client Name:** {entry.committee_member or 'N/A'}")
+                        st.markdown(f"**Committee Member:** {entry.committee_member or 'N/A'}")
                         st.markdown(f"**Client Name:** {entry.client_name or 'N/A'}")
                         st.markdown(f"**Season:** {entry.season or 'N/A'}")
                         st.markdown(f"**Contact Info:** {entry.contact_info or 'N/A'}")
