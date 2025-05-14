@@ -4,7 +4,7 @@ A centralized tool for tracking company outreach efforts made by TCG project com
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)
    - [Problem Statement](#problem-statement)
@@ -20,7 +20,7 @@ A centralized tool for tracking company outreach efforts made by TCG project com
 
 ---
 
-## 🔍 Overview
+## Overview
 
 ### Problem Statement
 
@@ -32,15 +32,15 @@ This project provides a centralized dashboard and backend database to track all 
 
 ### Benefits
 
-- 🔁 Prevents duplicated outreach by maintaining historical contact logs
-- 🔎 Searchable database for checking prior outreach per company or member
-- 📈 Analytics on who contacted which companies and how often
-- 🔐 Secure access limited to verified TCG members only
-- 🧠 Helps new directors quickly get up to speed with past outreach efforts
+- Prevents duplicated outreach by maintaining historical contact logs
+- Searchable database for checking prior outreach per company or member
+- Analytics on who contacted which companies and how often
+- Secure access limited to verified TCG members only
+- Helps new directors quickly get up to speed with past outreach efforts
 
 ---
 
-## ✨ Features
+## Features
 
 - **Home Dashboard**: View confirmed projects and search all outreach records
 - **Edit Records**: Search, modify, and delete existing outreach entries
@@ -50,7 +50,7 @@ This project provides a centralized dashboard and backend database to track all 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 - **Frontend**: [Streamlit](https://streamlit.io/) app for file upload, data exploration, and visual analytics
 - **Backend**: Python with SQLAlchemy for database interaction
@@ -60,7 +60,7 @@ This project provides a centralized dashboard and backend database to track all 
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 /tcg-outreach/
@@ -85,7 +85,7 @@ This project provides a centralized dashboard and backend database to track all 
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - **Python 3.10+**: Core programming language
 - **Streamlit**: Web application framework
@@ -98,7 +98,7 @@ This project provides a centralized dashboard and backend database to track all 
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 1. **Clone the repository**
    ```bash
@@ -134,7 +134,7 @@ This project provides a centralized dashboard and backend database to track all 
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Home Page
 - View confirmed projects at the top
@@ -168,7 +168,7 @@ Your CSV should include the following columns:
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - **Authentication**: Implement user login and role-based access
 - **Analytics Dashboard**: Add visualizations for outreach statistics
@@ -180,7 +180,7 @@ Your CSV should include the following columns:
 
 ---
 
-## 👨‍💻 Contributors
+## Contributors
 
 - **Pranav Belligundu** - Initial development and maintenance
   - [GitHub](https://github.com/pranav-B21)
@@ -188,7 +188,7 @@ Your CSV should include the following columns:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
