@@ -66,7 +66,7 @@ def gemini_audit_and_fix(data):
     {full_preview}
 
     Formatting Rules:
-        - Only output valid CSV, starting immediately with the header row. No markdown, no explanations, no extra text.
+        - Only output valid CSV, starting immediately with the header row. No markdown, no explanations, no extra text. 
         - Header Columns (in exact order): {REQUIRED_COLUMNS_STRING}
 
     Rules for each column:
