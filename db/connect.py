@@ -22,19 +22,9 @@ def test_connection():
     try:
         # Create a connection
         conn = engine.connect()
-        print("Connection successful!")
-        
-        # Execute a test query
-        result = conn.execute("SELECT NOW();").fetchone()
-        print("Current Time:", result)
-        
-        # Close the connection
-        conn.close()
-        print("Connection closed.")
         return True
         
     except Exception as e:
-        print(f"Failed to connect: {e}")
         return False
 
 # Test connection when this module is imported

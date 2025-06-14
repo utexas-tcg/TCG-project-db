@@ -60,9 +60,6 @@ def sort_industries(industries=None):
         # Parse the response as JSON
         result_text = response.text
 
-        print("Raw response from Gemini:")
-        print(result_text)
-        
         # Clean up the response if it contains markdown code blocks
         if "```json" in result_text:
             result_text = result_text.split("```json")[1].split("```")[0].strip()
@@ -87,7 +84,6 @@ def sort_industries(industries=None):
         return grouped_industries
         
     except Exception as e:
-        print(f"Error grouping industries: {e}")
         # Return empty dictionary with predefined categories if API fails
         return {category: [] for category in predefined_categories}
 

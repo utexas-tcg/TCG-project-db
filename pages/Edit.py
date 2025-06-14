@@ -32,7 +32,7 @@ def main():
                         st.subheader("Edit Record")
                         
                         # Create form fields with current values
-                        committee_member = st.text_input("TCG Member", value=entry.committee_member or "")
+                        committee_member = st.text_input("Project Committee Member", value=entry.committee_member or "")
                         client_name = st.text_input("Client Name", value=entry.client_name or "")
                         season = st.text_input("Season", value=entry.season or "")
                         company = st.text_input("Company", value=entry.company or "")

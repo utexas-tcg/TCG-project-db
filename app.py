@@ -70,8 +70,8 @@ if not st.session_state.authenticated:
 else:
     selected = option_menu(
         menu_title=None,
-        options=["Home", "Edit", "Upload"],
-        icons=["house", "pencil-square", "cloud-upload"],
+        options=["Home", "Edit", "Upload", "Add_Project"],
+        icons=["house", "pencil-square", "cloud-upload", "plus-circle"],
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",

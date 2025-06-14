@@ -31,6 +31,9 @@ def main():
                 with cols[j]:
                     with st.expander(f"{entry.company or 'No Company Name'}"):
                         st.markdown(f"**TCG Member:** {entry.committee_member or 'N/A'}")
+                        st.markdown(f"**PM:** {entry.pm or 'N/A'}")
+                        st.markdown(f"**Advisor:** {entry.advisor or 'N/A'}")
+                        st.markdown(f"**Member:** {entry.members or 'N/A'}")
                         st.markdown(f"**Client Name:** {entry.client_name or 'N/A'}")
                         st.markdown(f"**Season:** {entry.season or 'N/A'}")
                         st.markdown(f"**Contact Info:** {entry.contact_info or 'N/A'}")
@@ -138,8 +141,11 @@ def main():
             for j, entry in enumerate(filtered[i:i+3]):
                 with cols[j]:
                     with st.expander(f"{entry.company or 'No Company Name'}"):
-                        st.markdown(f"**TCG Member:** {entry.committee_member or 'N/A'}")
                         st.markdown(f"**Client Name:** {entry.client_name or 'N/A'}")
+                        st.markdown(f"**TCG Member:** {entry.committee_member or 'N/A'}")
+                        st.markdown(f"**PM:** {entry.pm or 'N/A'}")
+                        st.markdown(f"**Advisor:** {entry.advisor or 'N/A'}")
+                        st.markdown(f"**Member:** {entry.members or 'N/A'}")
                         st.markdown(f"**Season:** {entry.season or 'N/A'}")
                         st.markdown(f"**Contact Info:** {entry.contact_info or 'N/A'}")
                         st.markdown(f"**Industry:** {entry.industry or 'N/A'}")

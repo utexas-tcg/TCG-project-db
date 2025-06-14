@@ -7,6 +7,9 @@ class Outreach(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     committee_member = Column(String)
+    pm = Column(String, nullable=True)
+    members = Column(String, nullable=True)
+    advisor = Column(String, nullable=True)
     client_name = Column(String)
     season = Column(String)
     company = Column(String, index=True)
@@ -17,6 +20,7 @@ class Outreach(Base):
     project_confirmed = Column(Boolean)
     response = Column(Boolean)
     notes = Column(String)
+    
 
 # Create the table(s)
 Base.metadata.create_all(bind=engine)
